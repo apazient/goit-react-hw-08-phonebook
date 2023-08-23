@@ -2,7 +2,7 @@ import Contacts from 'pages/Contacts';
 import Login from 'pages/Login';
 import Register from 'pages/Register';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Layout } from './Layout/Layout';
 import { Home } from 'pages/Home';
@@ -18,7 +18,9 @@ export function App() {
   useEffect(() => {
     dispatch(refresh());
   }, [dispatch]);
+
   const refreshing = useSelector(selectIsLRefreshing);
+
   return refreshing ? (
     <h1>Loaging...</h1>
   ) : (
@@ -50,6 +52,7 @@ export function App() {
               </PrivateRoute>
             }
           />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
     </>

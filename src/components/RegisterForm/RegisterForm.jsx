@@ -77,7 +77,7 @@ export const RegisterForm = () => {
             placeholder="Enter your password"
           />
 
-          <button type="submit">Submit</button>
+          <button type="submit">Register</button>
         </Form>
       </Formik>
     </FormContainer>

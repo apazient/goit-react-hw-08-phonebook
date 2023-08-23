@@ -71,7 +71,7 @@ export const LoginForm = () => {
             placeholder="Enter your password"
           />
 
-          <button type="submit">Submit</button>
+          <button type="submit">Login</button>
         </Form>
       </Formik>
     </FormContainer>
