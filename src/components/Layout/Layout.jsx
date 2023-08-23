@@ -1,7 +1,7 @@
 import React from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import { NavBar } from './NavBar';
+import { Outlet } from 'react-router-dom';
+import { LayoutWrapper, WrapperOutlet } from './layoutStyle';
+import { NavBar } from '../NavBar/NavBar';
 
 export const Layout = () => {
   return (
@@ -13,11 +13,3 @@ export const Layout = () => {
     </LayoutWrapper>
   );
 };
-const LayoutWrapper = styled.div`
-  display: flex;
-  widht: 100%;
-`;
-const WrapperOutlet = styled.div`
-  padding: 20px;
-  padding-top: 70px;
-`;

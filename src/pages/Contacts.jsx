@@ -1,15 +1,15 @@
 import React from 'react';
-import ContactForm from 'components/ContactForm/ContactForm';
+import ContactForm from 'components/ContactForm/ContactForm.jsx';
 import Filter from 'components/Filter/Filter';
 import ContactList from 'components/ContactList/ContactList';
+import { Title } from '../components/SharedStyledComponent/sharedStyledComponent';
 const Contacts = () => {
   return (
     <>
-      <h2>Phonebook</h2>
+      <Title>Phonebook</Title>
       <ContactForm />
-      <h2>Contacts</h2>
+      <Title>Contacts</Title>
       <Filter></Filter>
-
       <ContactList />
     </>
   );

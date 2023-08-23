@@ -5,10 +5,12 @@ import {
   FormContainer,
   Title,
   Label,
-} from 'components/LoginForm/LoginForm';
+  Input,
+} from '../SharedStyledComponent/sharedStyledComponent';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/Auth/operations';
+
 export const RegisterForm = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
@@ -51,7 +53,7 @@ export const RegisterForm = () => {
       <Formik>
         <Form onSubmit={handleSubmit}>
           <Label name="name">Name</Label>
-          <input
+          <Input
             type="text"
             name="name"
             onChange={handleChange}
@@ -59,7 +61,7 @@ export const RegisterForm = () => {
             placeholder="Enter your Name"
           />
           <Label name="email">Email</Label>
-          <input
+          <Input
             type="email"
             name="email"
             onChange={handleChange}
@@ -67,7 +69,7 @@ export const RegisterForm = () => {
             placeholder="Enter your Email"
           />
           <Label name="password">Password</Label>
-          <input
+          <Input
             type="password"
             name="password"
             onChange={handleChange}

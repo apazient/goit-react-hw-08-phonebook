@@ -1,11 +1,15 @@
 import React from 'react';
 import { useEffect } from 'react';
-import style from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchContacts, deleteContact } from 'redux/operations';
+import { fetchContacts, deleteContact } from 'redux/Contacts/operations';
 
-import { selectFilteredContacts, selectIsLoading } from 'redux/selectors';
+import {
+  selectFilteredContacts,
+  selectIsLoading,
+} from 'redux/Contacts/selectors';
+import { StyledLink } from '../SharedStyledComponent/sharedStyledComponent';
+import { Item } from './contactListStyle';
 
 const ContactList = () => {
   const loading = useSelector(selectIsLoading);
@@ -22,17 +26,16 @@ const ContactList = () => {
       {filteredData?.map(({ id, name, number }) => {
         return (
           <li key={id}>
-            <div className={style.item}>
+            <Item>
               {name}: {number}
-              <button
+              <StyledLink
                 disabled={loading}
-                className={style.button}
                 type="button"
                 onClick={() => dispatch(deleteContact(id))}
               >
                 Delete
-              </button>
-            </div>
+              </StyledLink>
+            </Item>
           </li>
         );
       })}

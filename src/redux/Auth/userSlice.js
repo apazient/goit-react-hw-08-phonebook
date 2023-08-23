@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, login, logout } from './operations';
+import { register, login, logout, refresh } from './operations';
 
 const initialState = {
   user: {
@@ -7,7 +7,8 @@ const initialState = {
     password: '',
     name: '',
   },
-  isLoggenIn: false,
+  isLoggedIn: false,
+  isRefreshing: false,
   error: '',
   token: '',
 };
@@ -21,34 +22,29 @@ export const userSlice = createSlice({
       .addCase(register.fulfilled, (state, { payload }) => {
         state.user = payload.user;
         state.token = payload.token;
-        state.isLoggenIn = true;
+        state.isLoggedIn = true;
+      })
+      .addCase(refresh.fulfilled, (state, { payload }) => {
+        state.user = payload;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(refresh.pending, (state, { payload }) => {
+        state.isRefreshing = true;
+      })
+      .addCase(refresh.rejected, (state, { payload }) => {
+        state.isRefreshing = false;
       })
       .addCase(login.fulfilled, (state, { payload }) => {
         state.user = payload.user;
         state.token = payload.token;
-        state.isLoggenIn = true;
+        state.isLoggedIn = true;
       })
       .addCase(logout.fulfilled, (state, { payload }) => {
         state.user = { name: '', email: '' };
         state.token = '';
-        state.isLoggenIn = false;
+        state.isLoggedIn = false;
       });
-    // .addCase(deleteContact.fulfilled, (state, action) => {
-    //   state.contacts.items = state.contacts.items.filter(
-    //     item => item.id !== action.payload
-    //   );
-    //   state.isLoading = false;
-    // })
-    // .addCase(deleteContact.pending, (state, action) => {
-    //   state.isLoading = true;
-    // })
-    // .addCase(addContact.pending, (state, action) => {
-    //   state.isLoading = true;
-    // })
-    // .addCase(addContact.fulfilled, (state, action) => {
-    //   state.contacts.items.push(action.payload);
-    //   state.isLoading = false;
-    // });
   },
 });
 

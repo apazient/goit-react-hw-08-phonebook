@@ -3,6 +3,9 @@ export const getUser = state => {
 };
 
 export const stateIsLoggedIn = state => {
-  console.log(state);
-  return state.user.isLoggenIn;
+  return state.user.isLoggedIn;
+};
+
+export const selectIsLRefreshing = state => {
+  return state.user.isRefreshing;
 };

@@ -2,18 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { stateIsLoggedIn } from '../redux/Auth/selectors';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-export const PrivateRoute = ({ children }) => {
-  const location = useLocation();
+const PublicRoute = ({ children }) => {
   const isLoggedIn = useSelector(stateIsLoggedIn);
 
   if (isLoggedIn) {
-    return children;
+    return <Navigate to="/contacts" />;
   }
-  return <Navigate to="/login" state={{ from: location }} />;
+  return children;
 };
-
-PrivateRoute.propTypes = {
+PublicRoute.propTypes = {
   children: PropTypes.node,
 };
+export default PublicRoute;

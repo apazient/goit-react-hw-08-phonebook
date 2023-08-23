@@ -1,10 +1,16 @@
 import React from 'react';
+import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import style from './ContactForm.module.css';
 import { useState } from 'react';
-import { addContact } from 'redux/operations';
-import { isExistValue } from 'components/helpers/filter';
-import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/Contacts/operations';
+import { isExistValue } from 'helpers/filter';
+import { selectContacts } from 'redux/Contacts/selectors';
+import {
+  FormContainer,
+  Form,
+  Label,
+  Input,
+} from '../SharedStyledComponent/sharedStyledComponent';
 
 export function ContactForm() {
   const dispatch = useDispatch();
@@ -37,34 +43,34 @@ export function ContactForm() {
     setNumber('');
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="number" className={style.label}>
-        Name
-      </label>
-      <div className={style.form}>
-        <input
-          className={style.input}
-          type="text"
-          name="name"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          value={name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          className={style.input}
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          value={number}
-          onChange={handleChange}
-          required
-        />
-      </div>
+    <FormContainer>
+      <Formik>
+        <Form onSubmit={handleSubmit}>
+          <Label htmlFor="name">Name</Label>
 
-      <button type="submit">Add contact</button>
-    </form>
+          <Input
+            type="text"
+            name="name"
+            title="Please put some name"
+            value={name}
+            onChange={handleChange}
+            required
+          />
+          <Label htmlFor="number">Number</Label>
+          <Input
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            value={number}
+            onChange={handleChange}
+            required
+          />
+
+          <button type="submit">Add contact</button>
+        </Form>
+      </Formik>
+    </FormContainer>
   );
 }
 

@@ -3,7 +3,13 @@ import { Formik } from 'formik';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from 'redux/Auth/operations';
-import styled from 'styled-components';
+import {
+  FormContainer,
+  Title,
+  Form,
+  Label,
+  Input,
+} from '../SharedStyledComponent/sharedStyledComponent';
 import { useLocation, useNavigate } from 'react-router-dom';
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -34,6 +40,7 @@ export const LoginForm = () => {
     dispatch(login({ email, password }))
       .unwrap()
       .then(() => navigate(location.state?.from || '/'));
+    console.log(location);
     reset();
   };
 
@@ -44,11 +51,11 @@ export const LoginForm = () => {
 
   return (
     <FormContainer>
-      <Title>Sign up to Contacts Book </Title>
+      <Title>Sign in to Contacts Book </Title>
       <Formik>
         <Form onSubmit={handleSubmit}>
           <Label name="email">Email</Label>
-          <input
+          <Input
             type="email"
             name="email"
             onChange={handleChange}
@@ -56,7 +63,7 @@ export const LoginForm = () => {
             placeholder="Enter your Email"
           />
           <Label name="password">Password</Label>
-          <input
+          <Input
             type="password"
             name="password"
             onChange={handleChange}
@@ -70,23 +77,3 @@ export const LoginForm = () => {
     </FormContainer>
   );
 };
-
-export const FormContainer = styled.div`
-  max-width: 480px;
-  min-width: 280px;
-  margin: 0 auto;
-  text-align: center;
-`;
-export const Title = styled.h2`
-  margin: 0;
-  padding: 20px 0px;
-`;
-export const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    
-    al
-}`;
-export const Label = styled.label`
-  display: inline-flex;
-`;

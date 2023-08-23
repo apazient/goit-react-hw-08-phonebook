@@ -51,3 +51,19 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+//pul token from localstorege
+export const refresh = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+  const savedToken = thunkAPI.getState().user.token;
+  if (!savedToken) {
+    return thunkAPI.rejectWithValue('Token is not exist');
+  }
+  try {
+    setToken(savedToken);
+    console.log(savedToken);
+    const res = await API.get('/users/current');
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
